@@ -1,0 +1,8 @@
+<?php
+
+	if (SWIFT_App::IsInstalled('cm_TFS'))
+	{
+		$this->Load->Controller('cm_TFS','cm_TFS')->Load->Method('loadTab', $_SWIFT_TicketObject);
+		
+	}
+?>

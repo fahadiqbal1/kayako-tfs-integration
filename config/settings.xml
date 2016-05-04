@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<swiftsettings>
+    <group name="settings_cmtfs" app="cm_tfs" ishidden="0">
+        <setting name="cmtfs_tfsurl" type="text">
+            <defaultvalue>http://ddtfsapp01:8080/tfs/TFSCollection/CacheMatrixPlatform_Baseline</defaultvalue>
+        </setting>
+    </group>
+</swiftsettings>

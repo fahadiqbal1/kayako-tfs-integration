@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <title>CM TFS Integration</title>
+    <description>Custom Cachematrix TFS Integration</description>
+    <author>Fahad</author>
+    <version>0.0.1</version>
+    <compatibleWith>4.73.2</compatibleWith>
+    <tabs>
+    </tabs>
+</config>
