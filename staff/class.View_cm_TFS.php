@@ -1,21 +1,33 @@
 <?php
 class View_cm_TFS extends SWIFT_View{
-    public function __construct()
-    {
-        parent::__construct();
-        $this->Load->Library('Settings:Settings');
-        return true;
-    }
- 
-    public function __destruct()
-    {
-        parent::__destruct();
-        return true;
-    }
 	
+	protected $helper;
+
+	public function __construct()
+	{
+		parent::__construct();
+		// Load the settings
+			$this->Load->Library('Settings:Settings');
+		// Load the Helper class and tie it to $helper
+			$this->Load->Library('Common:cm_TFS_Helper', [], true, 'cm_TFS');
+			$this->helper = new SWIFT_cm_TFS_Helper();
+		return true;
+	}
+ 
+	public function __destruct()
+	{
+		parent::__destruct();
+		return true;
+	}
+	
+	/**
+	 * Render the Unlinked Tab - User will be asked to input a TFS number
+	 * @param  SWIFT_Ticket $_SWIFT_TicketObject The ticket object of the current ticket
+	 * @return boolean                           Ture if tab is loaded
+	 */
 	public function _RenderUnLinkedTab( SWIFT_Ticket $_SWIFT_TicketObject )
 	{
-    	$_SWIFT = SWIFT::GetInstance(); 
+		$_SWIFT = SWIFT::GetInstance(); 
 
 		if (!$this->GetIsClassLoaded()){
 			return false;
@@ -23,7 +35,7 @@ class View_cm_TFS extends SWIFT_View{
 
 		$_TFSTabObject = $this->UserInterface->AddTab($this->Language->Get('cm_TFS_tabName'), 'icon_ticketreply.png', 'cm_TFS_tab', false, false, 4 );
 
-    	$_TFSTabObject->SetColumnWidth('15%');
+		$_TFSTabObject->SetColumnWidth('15%');
 		$_TFSTabObject->LoadToolbar();
 		$_TFSTabObject->Toolbar->AddButton($this->Language->Get('cm_TFS_linkBtn'), 'icon_check.gif', '/cm_TFS/cm_TFS/TFSLinkSubmit/' . $_SWIFT_TicketObject->GetTicketID() . '/', SWIFT_UserInterfaceToolbar::LINK_FORM);
 		$_TFSTabObject->Title( $this->Language->Get('cm_TFS_name'), 'doublearrows.gif' );
@@ -34,6 +46,12 @@ class View_cm_TFS extends SWIFT_View{
 		
 	}
 
+	/**
+	 * Render the Linked Tab - User will be shown TFS ticket details
+	 * @param  SWIFT_Ticket $_SWIFT_TicketObject The ticket object of the current ticket
+	 * @param  array        $linkDetails         The DB record of the link
+	 * @return boolean                           Ture if tab is loaded
+	 */
 	public function _RenderLinkedTab( SWIFT_Ticket $_SWIFT_TicketObject, array $linkDetails )
 	{
 		$_SWIFT = SWIFT::GetInstance(); 
@@ -42,7 +60,7 @@ class View_cm_TFS extends SWIFT_View{
 			return false;
 		}
 
-		$TFS_URL = "http://ddtfsapp01:8080/tfs/TFSCollection/CacheMatrixPlatform_Baseline";
+		$TFS_URL = $this->helper->getURL();
 
 		$_renderHTML = "<tr><td>";
 		$_renderHTML .= "";
