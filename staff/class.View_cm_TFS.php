@@ -64,7 +64,7 @@ class View_cm_TFS extends SWIFT_View{
 
 		$_renderHTML = "<tr><td>";
 		$_renderHTML .= "";
-		$_renderHTML .= "</td></tr>";
+		$_renderHTML .= "</td></tr><script> $('.disabled').attr('disabled','disabled'); </script>";
 
 		$_TFSTabObject = $this->UserInterface->AddTab($this->Language->Get('cm_TFS_tabName'), 'icon_ticketreply.png', 'cm_TFS_tab', false, false, 4 );
 		$_TFSTabObject->SetColumnWidth('15%');
@@ -74,6 +74,11 @@ class View_cm_TFS extends SWIFT_View{
 		$_TFSTabObject->Toolbar->AddButton($this->Language->Get('cm_TFS_updatelinkBtn'), 'icon_edit.png', '/cm_TFS/cm_TFS/TFSLinkSubmit/' . $_SWIFT_TicketObject->GetTicketID() . '/', SWIFT_UserInterfaceToolbar::LINK_FORM);
 		$_TFSTabObject->Toolbar->AddButton($this->Language->Get('cm_TFS_removelinkBtn'), 'icon_diffdelete.gif', '/cm_TFS/cm_TFS/TFSUnLinkSubmit/' . $_SWIFT_TicketObject->GetTicketID() . '/', SWIFT_UserInterfaceToolbar::LINK_FORM);
 		$_TFSTabObject->Number( 'tfs_id' , $this->Language->Get('cm_TFS_linkInputDesc'), '', $linkDetails['tfsNumber'] );
+		$_TFSTabObject->Title('{Workitem Title}');
+		$_TFSTabObject->Text('tfs_type','Type','','{Workitem Type}','text','30',0,'','disabled');
+		$_TFSTabObject->Text('tfs_area_path','Area Path','','{Workitem Area Path}','text','30',0,'','disabled');
+		$_TFSTabObject->Text('tfs_iteration','Iteration Path','','{Workitem Iteration Path}','text','30',0,'','disabled');
+
 		$_TFSTabObject->RowHTML($_renderHTML);
 
 	}
