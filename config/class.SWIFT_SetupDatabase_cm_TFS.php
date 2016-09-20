@@ -48,7 +48,7 @@ class SWIFT_SetupDatabase_cm_TFS extends SWIFT_SetupDatabase
 	public function ImportSettings()
 	{
 		$this->Load->Library('Settings:SettingsManager');
-		$this->SettingsManager->Import('./'SWIFT_APPSDIRECTORY.'/cm_TFS/config/settings.xml');
+		$this->SettingsManager->Import('./'.SWIFT_APPSDIRECTORY.'/cm_TFS/config/settings.xml');
 	}
 }
  
